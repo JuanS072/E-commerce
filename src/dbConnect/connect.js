@@ -1,6 +1,4 @@
 const mongoose = require('mongoose')
-const password = 'hN0VqNyqNaI1iW2A'
-const dbname = 'E-commerce'
-const uri = `mongodb+srv://juancarlossequeira07:${password}@juan.g7hhwxb.mongodb.net/${dbname}?retryWrites=true&w=majority`
+require('dotenv').config();
 
-module.exports = () => mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
+module.exports = () => mongoose.connect(process.env.URI, {useNewUrlParser: true, useUnifiedTopology: true})
