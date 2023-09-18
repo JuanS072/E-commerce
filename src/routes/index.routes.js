@@ -10,6 +10,8 @@ router.get('/Products/Product/:id', controller.getProductId);
 
 router.get('/Products/types/:type', controller.getProducByTypes);
 
+router.get('/Products/Avaliables/:stock', controller.getProductsAvaliables);
+
 //Ruta para eliminar una store
 router.delete("/Products/delete/:id", controller.deleteProduct)
 

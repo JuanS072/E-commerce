@@ -44,6 +44,17 @@ module.exports.getProducts = async (req, res) => {
   }
   };
 
+  module.exports.getProductsAvaliables = async (req, res) => {
+    try{
+    await connection();
+    const { stock } = req.params;
+    const product = await ProductModel.find({stock: stock});
+    res.json(product);
+  } catch (error) {
+    console.error(error);
+  }
+  };
+
   module.exports.deleteProduct = async (req, res) => {
     try{
     await connection();
