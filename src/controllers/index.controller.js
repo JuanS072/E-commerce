@@ -2,7 +2,7 @@ const controller = {};
 const connection = require('../dbConnect/connect');
 const ProductModel = require('../models/products.Model');
 const OrdersModel = require('../models/orders.Model');
-const ClientsModel = require('../models/clientes.Model');
+const ClientsModel = require('../models/clientes.Models');
 
 /*---------------------Products------------------------------ */
 module.exports.getProducts = async (req, res) => {
