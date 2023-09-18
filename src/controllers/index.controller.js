@@ -4,6 +4,8 @@ const ProductModel = require('../models/products.Model');
 const OrdersModel = require('../models/orders.Model');
 const ClientsModel = require('../models/clientes.Models');
 const User = require('../models/userAdmin');
+const GenerateToken = require('../utils/tokenManager');
+
 const Bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
@@ -189,13 +191,9 @@ module.exports.getProducts = async (req, res) => {
     // Si el usuario existe, procedemos
     if (userRecord) {
       if (password === userRecord.password) {
-        const token = jwt.sign(
-          { email: userRecord.email, id: userRecord._id, username },
-          process.env.API_KEY,
-          { expiresIn: process.env.TOKEN_EXPIRES_IN },
-        );
+        const {token, expiresIn} = GenerateToken.generateToken(userRecord.id);
 
-        return res.status(200).json({ token });
+        return res.status(200).json({ token, expiresIn });
       }
     }
     
