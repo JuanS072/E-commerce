@@ -21,6 +21,10 @@ const OrdersSchema = new Schema({
         type: String,
         required: true,
       },
+      Valor: {
+        type: String,
+        required: true,
+      },
 });
 
 const OrdersModels = mongoose.model('orders', OrdersSchema);

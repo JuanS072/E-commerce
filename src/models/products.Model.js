@@ -25,6 +25,10 @@ const ProductsSchema = new Schema({
         type: String,
         required: true,
       },
+      Precio: {
+        type: String,
+        required: true,
+      },
 });
 
 const ProductModels = mongoose.model('products', ProductsSchema);
