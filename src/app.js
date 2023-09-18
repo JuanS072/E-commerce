@@ -2,9 +2,8 @@ const express = require('express');
 const app = express();
 const routers = require('./routes/index.routes'); 
 
-app.use('/Products', routers);
-app.use('/Orders', routers);
-app.use('/Clients', routers);
+app.use('/', routers);
+
 
 
 app.listen(3000, ()=>{

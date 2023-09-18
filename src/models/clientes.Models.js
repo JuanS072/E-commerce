@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const ClientsSchema = new Schema({
-      cantidad: {
-        type: Number,
+      name: {
+        type: String,
         required: true,
       }
 });
 
-const ClientsModels = mongoose.model('Clients', ClientsSchema);
+const ClientsModels = mongoose.model('clients', ClientsSchema);
 
 module.exports = ClientsModels;

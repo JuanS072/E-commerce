@@ -4,37 +4,37 @@ const controller = require('../controllers/index.controller');
 
 
 /*---------------------Products------------------------------ */
-router.get('/', controller.getProducts);
+router.get('/Products/', controller.getProducts);
 
-router.get('/:id', controller.getProductId);
+router.get('/Products/Product/:id', controller.getProductId);
 
 //Ruta para eliminar una store
-router.delete("/:id/delete", controller.deleteProduct)
+router.delete("/Products/delete/:id", controller.deleteProduct)
 
 //Ruta para editar la información de una store
-router.put("/:id/update", controller.changeProduct)
+router.put("/Products/update/:id", controller.changeProduct)
 
 //Ruta para crear una store
-router.post("/new", controller.postProduct)
+router.post("/Products/new", controller.postProduct)
 
   /*---------------------Orders------------------------------ */
-  router.get('Ordenes/', controller.getOrders);
+  router.get('/Ordenes/', controller.getOrders);
 
-  router.get('Orden/:id', controller.getOrderId);
+  router.get('/Ordenes/Orden/:id/', controller.getOrderId);
   
   //Ruta para eliminar una store
-  router.delete("Orden/:id/delete", controller.deleteOrder)
+  router.delete("/Ordenes/delete/:id", controller.deleteOrder)
   
   //Ruta para editar la información de una store
-  router.put("Orden/:id/update", controller.changeOrder)
+  router.put("Ordenes/update/:id", controller.changeOrder)
   
   //Ruta para crear una store
-  router.post("Orden/new", controller.postOrder)
+  router.post("/Ordenes/new", controller.postOrder)
   
   /*---------------------Clients------------------------------ */
-  router.put("Clientes/:id/update/sum", controller.postSumClients)
+  router.get("/Clientes/", controller.getClients)
 
-  router.put("Clientes/:id/update/rest", controller.postRestClients)
+  router.post("/Clientes/new/", controller.postClients)
 
 
 module.exports = router;
