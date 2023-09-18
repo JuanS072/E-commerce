@@ -8,6 +8,8 @@ router.get('/Products/', controller.getProducts);
 
 router.get('/Products/Product/:id', controller.getProductId);
 
+router.get('/Products/types/:type', controller.getProducByTypes);
+
 //Ruta para eliminar una store
 router.delete("/Products/delete/:id", controller.deleteProduct)
 
@@ -35,6 +37,11 @@ router.post("/Products/new", controller.postProduct)
   router.get("/Clientes/", controller.getClients)
 
   router.post("/Clientes/new/", controller.postClients)
+
+/*---------------------UserAdmin------------------------------ */
+
+router.post('/login', controller.login);
+
 
 
 module.exports = router;

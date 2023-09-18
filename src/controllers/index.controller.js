@@ -3,6 +3,11 @@ const connection = require('../dbConnect/connect');
 const ProductModel = require('../models/products.Model');
 const OrdersModel = require('../models/orders.Model');
 const ClientsModel = require('../models/clientes.Models');
+const User = require('../models/userAdmin');
+const Bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
 /*---------------------Products------------------------------ */
 module.exports.getProducts = async (req, res) => {
@@ -22,6 +27,17 @@ module.exports.getProducts = async (req, res) => {
     const { id } = req.params;
     const product = await ProductModel.findById(id);
     product.toJSON().isOpen;
+    res.json(product);
+  } catch (error) {
+    console.error(error);
+  }
+  };
+
+  module.exports.getProducByTypes = async (req, res) => {
+    try{
+    await connection();
+    const { type } = req.params;
+    const product = await ProductModel.find({type: type});
     res.json(product);
   } catch (error) {
     console.error(error);
@@ -145,4 +161,43 @@ module.exports.getProducts = async (req, res) => {
   } catch (error) {
     console.error(error);
   }
+  };
+
+  /*---------------------UserAdmin------------------------------ */
+
+  module.exports.login = async ({ body }, res) => {
+    await connection();
+    // Pedimos solamente el password y el nombre de usuario
+    const { password, username } = body;
+    console.log(username);
+    console.log(password);
+
+  try {
+    // Realizamos una búsqueda para validar si el usuario existe
+    const userRecord = await User.findOne({ username });
+    // Si el usuario existe, procedemos
+    if (userRecord) {
+      if (password === userRecord.password) {
+        const token = jwt.sign(
+          { email: userRecord.email, id: userRecord._id, username },
+          process.env.API_KEY,
+          { expiresIn: process.env.TOKEN_EXPIRES_IN },
+        );
+
+        return res.status(200).json({ token });
+      }
+    }
+    
+    return res.status(401).json({
+        status: 401,
+        message: '¡Tu email o contraseña son incorrectos, por favor, veríficalo!',
+      });
+    } catch (error) {
+      // Este error se genera si se procesa mal la solicitud
+      // en la base de datos
+      return res.status(400).json({
+        status: 400,
+        message: error,
+      });
+    }
   };
