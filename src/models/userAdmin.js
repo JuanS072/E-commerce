@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const Schema = mongoose.Schema;
-
+ 
 const UserAdminSchema = new Schema(
   {
     username: {
